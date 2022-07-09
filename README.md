@@ -16,9 +16,11 @@ Most response helpers will have the following functions.
 ### Simple
 
 ```ts
+import { serve } from "https://deno.land/std@0.142.0/http/server.ts";
+
 import { ok } from "https://deno.land/x/http_response_helpers/mod.ts";
 
-self.addEventListener("fetch", () => {
+serve((req: Request) => {
   return ok("Hello world");
 });
 ```
@@ -26,9 +28,11 @@ self.addEventListener("fetch", () => {
 ### With headers
 
 ```ts
+import { serve } from "https://deno.land/std@0.142.0/http/server.ts";
+
 import { ok } from "https://deno.land/x/http_response_helpers/mod.ts";
 
-self.addEventListener("fetch", () => {
+serve((req: Request) => {
   return ok("Hello world", {
     headers: {
       "Content-Type": "text/plain",
@@ -42,9 +46,11 @@ self.addEventListener("fetch", () => {
 Deserializes the body object supplied and sets the `Content-Type` to `application/json`.
 
 ```ts
+import { serve } from "https://deno.land/std@0.142.0/http/server.ts";
+
 import { ok } from "https://deno.land/x/http_response_helpers/mod.ts";
 
-self.addEventListener("fetch", () => {
+serve((req: Request) => {
   const body = {
     message: "Hello world",
   };
@@ -55,9 +61,11 @@ self.addEventListener("fetch", () => {
 #### With headers
 
 ```ts
+import { serve } from "https://deno.land/std@0.142.0/http/server.ts";
+
 import { ok } from "https://deno.land/x/http_response_helpers/mod.ts";
 
-self.addEventListener("fetch", () => {
+serve((req: Request) => {
   const body = {
     message: "Hello world",
   };
@@ -72,9 +80,11 @@ self.addEventListener("fetch", () => {
 ### Plain text
 
 ```ts
+import { serve } from "https://deno.land/std@0.142.0/http/server.ts";
+
 import { ok } from "https://deno.land/x/http_response_helpers/mod.ts";
 
-self.addEventListener("fetch", () => {
+serve((req: Request) => {
   return ok.text("Hello world");
 });
 ```
@@ -82,9 +92,11 @@ self.addEventListener("fetch", () => {
 ### Blobs
 
 ```ts
+import { serve } from "https://deno.land/std@0.142.0/http/server.ts";
+
 import { ok } from "https://deno.land/x/http_response_helpers/mod.ts";
 
-self.addEventListener("fetch", () => {
+serve((req: Request) => {
   return ok.blob(new Uint8Array([1, 2, 3, 4]));
 });
 ```
