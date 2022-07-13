@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "genmod": "deno run ./tools/generate.js > mod.ts && deno fmt mod.ts",
+    "tests": "deno run ./tools/generatetests.js > test.ts && deno fmt test.ts && deno test ./test.ts"
+  }
+}

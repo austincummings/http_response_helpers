@@ -1,20 +1,53 @@
 // deno-lint-ignore-file no-namespace
-
 import {
   Status,
   STATUS_TEXT,
 } from "https://deno.land/std@0.146.0/http/http_status.ts";
 
+/**
+ * A fetch API `ResponseInit` object with the `status` and `statusText` fields omitted.
+ */
 export type ResponseInitWithoutStatus = Omit<
   ResponseInit,
   "status" | "statusText"
 >;
 
-// Informational responses (100–199)
+/**
+ * Creates a `Response` object with a `status` of 100 and `statusText` of "Continue".
+ */
+export function httpContinue(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
+  return new Response(body, {
+    status: Status.Continue,
+    statusText: STATUS_TEXT[Status.Continue],
+    ...init,
+  });
+}
 
+export namespace httpContinue {
+  /**
+   * Creates a JSON `Response` object with a `status` of 100 and `statusText` of "Continue".
+   */
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
+  ): Response {
+    return Response.json(data, {
+      status: Status.Continue,
+      statusText: STATUS_TEXT[Status.Continue],
+      ...init,
+    });
+  }
+}
+
+/**
+ * Creates a `Response` object with a `status` of 101 and `statusText` of "Switching Protocols".
+ */
 export function switchingProtocols(
-  body?: null,
-  init?: ResponseInitWithoutStatus
+  body?: null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.SwitchingProtocols,
@@ -23,9 +56,73 @@ export function switchingProtocols(
   });
 }
 
-// Successful responses (200–299)
+/**
+ * Creates a `Response` object with a `status` of 102 and `statusText` of "Processing".
+ */
+export function processing(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
+  return new Response(body, {
+    status: Status.Processing,
+    statusText: STATUS_TEXT[Status.Processing],
+    ...init,
+  });
+}
 
-export function ok(body?: BodyInit | null, init?: ResponseInit): Response {
+export namespace processing {
+  /**
+   * Creates a JSON `Response` object with a `status` of 102 and `statusText` of "Processing".
+   */
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
+  ): Response {
+    return Response.json(data, {
+      status: Status.Processing,
+      statusText: STATUS_TEXT[Status.Processing],
+      ...init,
+    });
+  }
+}
+
+/**
+ * Creates a `Response` object with a `status` of 103 and `statusText` of "Early Hints".
+ */
+export function earlyHints(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
+  return new Response(body, {
+    status: Status.EarlyHints,
+    statusText: STATUS_TEXT[Status.EarlyHints],
+    ...init,
+  });
+}
+
+export namespace earlyHints {
+  /**
+   * Creates a JSON `Response` object with a `status` of 103 and `statusText` of "Early Hints".
+   */
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
+  ): Response {
+    return Response.json(data, {
+      status: Status.EarlyHints,
+      statusText: STATUS_TEXT[Status.EarlyHints],
+      ...init,
+    });
+  }
+}
+
+/**
+ * Creates a `Response` object with a `status` of 200 and `statusText` of "OK".
+ */
+export function ok(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
   return new Response(body, {
     status: Status.OK,
     statusText: STATUS_TEXT[Status.OK],
@@ -35,58 +132,27 @@ export function ok(body?: BodyInit | null, init?: ResponseInit): Response {
 
 export namespace ok {
   /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 200 and `statusText` of "OK".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return ok(body, {
+    return Response.json(data, {
+      status: Status.OK,
+      statusText: STATUS_TEXT[Status.OK],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return ok(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return ok(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-export function created(body?: BodyInit | null, init?: ResponseInit): Response {
+/**
+ * Creates a `Response` object with a `status` of 201 and `statusText` of "Created".
+ */
+export function created(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
   return new Response(body, {
     status: Status.Created,
     statusText: STATUS_TEXT[Status.Created],
@@ -96,60 +162,26 @@ export function created(body?: BodyInit | null, init?: ResponseInit): Response {
 
 export namespace created {
   /**
-   * @deprecated will be removed in 2.0 in favor of `created` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 201 and `statusText` of "Created".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return created(body, {
+    return Response.json(data, {
+      status: Status.Created,
+      statusText: STATUS_TEXT[Status.Created],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return created(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return created(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 202 and `statusText` of "Accepted".
+ */
 export function accepted(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.Accepted,
@@ -160,60 +192,26 @@ export function accepted(
 
 export namespace accepted {
   /**
-   * @deprecated will be removed in 2.0 in favor of `accepted` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 202 and `statusText` of "Accepted".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return accepted(body, {
+    return Response.json(data, {
+      status: Status.Accepted,
+      statusText: STATUS_TEXT[Status.Accepted],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return accepted(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return accepted(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 203 and `statusText` of "Non Authoritative Info".
+ */
 export function nonAuthoritativeInfo(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NonAuthoritativeInfo,
@@ -224,60 +222,26 @@ export function nonAuthoritativeInfo(
 
 export namespace nonAuthoritativeInfo {
   /**
-   * @deprecated will be removed in 2.0 in favor of `nonAuthoritativeInfo` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 203 and `statusText` of "Non Authoritative Info".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return nonAuthoritativeInfo(body, {
+    return Response.json(data, {
+      status: Status.NonAuthoritativeInfo,
+      statusText: STATUS_TEXT[Status.NonAuthoritativeInfo],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return nonAuthoritativeInfo(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return nonAuthoritativeInfo(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 204 and `statusText` of "No Content".
+ */
 export function noContent(
-  body?: null,
-  init?: ResponseInitWithoutStatus
+  body?: null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NoContent,
@@ -286,9 +250,12 @@ export function noContent(
   });
 }
 
+/**
+ * Creates a `Response` object with a `status` of 205 and `statusText` of "Reset Content".
+ */
 export function resetContent(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.ResetContent,
@@ -297,62 +264,12 @@ export function resetContent(
   });
 }
 
-export namespace resetContent {
-  /**
-   * @deprecated will be removed in 2.0 in favor of `resetContent` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return resetContent(body, {
-      ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return resetContent(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return resetContent(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
-    });
-  }
-}
-
+/**
+ * Creates a `Response` object with a `status` of 206 and `statusText` of "Partial Content".
+ */
 export function partialContent(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.PartialContent,
@@ -363,60 +280,26 @@ export function partialContent(
 
 export namespace partialContent {
   /**
-   * @deprecated will be removed in 2.0 in favor of `partialContent` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 206 and `statusText` of "Partial Content".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return partialContent(body, {
+    return Response.json(data, {
+      status: Status.PartialContent,
+      statusText: STATUS_TEXT[Status.PartialContent],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return partialContent(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return partialContent(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 207 and `statusText` of "Multi Status".
+ */
 export function multiStatus(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.MultiStatus,
@@ -427,60 +310,26 @@ export function multiStatus(
 
 export namespace multiStatus {
   /**
-   * @deprecated will be removed in 2.0 in favor of `multiStatus` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 207 and `statusText` of "Multi Status".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return multiStatus(body, {
+    return Response.json(data, {
+      status: Status.MultiStatus,
+      statusText: STATUS_TEXT[Status.MultiStatus],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return multiStatus(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return multiStatus(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 208 and `statusText` of "Already Reported".
+ */
 export function alreadyReported(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.AlreadyReported,
@@ -491,58 +340,27 @@ export function alreadyReported(
 
 export namespace alreadyReported {
   /**
-   * @deprecated will be removed in 2.0 in favor of `alreadyReported` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 208 and `statusText` of "Already Reported".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return alreadyReported(body, {
+    return Response.json(data, {
+      status: Status.AlreadyReported,
+      statusText: STATUS_TEXT[Status.AlreadyReported],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return alreadyReported(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return alreadyReported(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-export function imUsed(body?: BodyInit | null, init?: ResponseInit): Response {
+/**
+ * Creates a `Response` object with a `status` of 226 and `statusText` of "IM Used".
+ */
+export function imUsed(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
   return new Response(body, {
     status: Status.IMUsed,
     statusText: STATUS_TEXT[Status.IMUsed],
@@ -552,62 +370,26 @@ export function imUsed(body?: BodyInit | null, init?: ResponseInit): Response {
 
 export namespace imUsed {
   /**
-   * @deprecated will be removed in 2.0 in favor of `imUsed` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 226 and `statusText` of "IM Used".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return imUsed(body, {
+    return Response.json(data, {
+      status: Status.IMUsed,
+      statusText: STATUS_TEXT[Status.IMUsed],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return imUsed(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return imUsed(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-// Redirects (300–399)
-
+/**
+ * Creates a `Response` object with a `status` of 300 and `statusText` of "Multiple Choices".
+ */
 export function multipleChoices(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.MultipleChoices,
@@ -618,60 +400,26 @@ export function multipleChoices(
 
 export namespace multipleChoices {
   /**
-   * @deprecated will be removed in 2.0 in favor of `multipleChoices` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 300 and `statusText` of "Multiple Choices".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return multipleChoices(body, {
+    return Response.json(data, {
+      status: Status.MultipleChoices,
+      statusText: STATUS_TEXT[Status.MultipleChoices],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return multipleChoices(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return multipleChoices(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 301 and `statusText` of "Moved Permanently".
+ */
 export function movedPermanently(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.MovedPermanently,
@@ -682,58 +430,27 @@ export function movedPermanently(
 
 export namespace movedPermanently {
   /**
-   * @deprecated will be removed in 2.0 in favor of `movedPermanently` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 301 and `statusText` of "Moved Permanently".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return movedPermanently(body, {
+    return Response.json(data, {
+      status: Status.MovedPermanently,
+      statusText: STATUS_TEXT[Status.MovedPermanently],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return movedPermanently(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return movedPermanently(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-export function found(body?: BodyInit | null, init?: ResponseInit): Response {
+/**
+ * Creates a `Response` object with a `status` of 302 and `statusText` of "Found".
+ */
+export function found(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
   return new Response(body, {
     status: Status.Found,
     statusText: STATUS_TEXT[Status.Found],
@@ -743,60 +460,26 @@ export function found(body?: BodyInit | null, init?: ResponseInit): Response {
 
 export namespace found {
   /**
-   * @deprecated will be removed in 2.0 in favor of `found` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 302 and `statusText` of "Found".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return found(body, {
+    return Response.json(data, {
+      status: Status.Found,
+      statusText: STATUS_TEXT[Status.Found],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return found(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return found(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 303 and `statusText` of "See Other".
+ */
 export function seeOther(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.SeeOther,
@@ -807,60 +490,26 @@ export function seeOther(
 
 export namespace seeOther {
   /**
-   * @deprecated will be removed in 2.0 in favor of `seeOther` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 303 and `statusText` of "See Other".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return seeOther(body, {
+    return Response.json(data, {
+      status: Status.SeeOther,
+      statusText: STATUS_TEXT[Status.SeeOther],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return seeOther(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return seeOther(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 304 and `statusText` of "Not Modified".
+ */
 export function notModified(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NotModified,
@@ -869,62 +518,12 @@ export function notModified(
   });
 }
 
-export namespace notModified {
-  /**
-   * @deprecated will be removed in 2.0 in favor of `notModified` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return notModified(body, {
-      ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notModified(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notModified(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
-    });
-  }
-}
-
+/**
+ * Creates a `Response` object with a `status` of 305 and `statusText` of "Use Proxy".
+ */
 export function useProxy(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.UseProxy,
@@ -935,60 +534,26 @@ export function useProxy(
 
 export namespace useProxy {
   /**
-   * @deprecated will be removed in 2.0 in favor of `useProxy` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 305 and `statusText` of "Use Proxy".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return useProxy(body, {
+    return Response.json(data, {
+      status: Status.UseProxy,
+      statusText: STATUS_TEXT[Status.UseProxy],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return useProxy(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return useProxy(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 307 and `statusText` of "Temporary Redirect".
+ */
 export function temporaryRedirect(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.TemporaryRedirect,
@@ -999,60 +564,26 @@ export function temporaryRedirect(
 
 export namespace temporaryRedirect {
   /**
-   * @deprecated will be removed in 2.0 in favor of `temporaryRedirect` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 307 and `statusText` of "Temporary Redirect".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return temporaryRedirect(body, {
+    return Response.json(data, {
+      status: Status.TemporaryRedirect,
+      statusText: STATUS_TEXT[Status.TemporaryRedirect],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return temporaryRedirect(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return temporaryRedirect(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 308 and `statusText` of "Permanent Redirect".
+ */
 export function permanentRedirect(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.PermanentRedirect,
@@ -1063,62 +594,26 @@ export function permanentRedirect(
 
 export namespace permanentRedirect {
   /**
-   * @deprecated will be removed in 2.0 in favor of `permanentRedirect` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 308 and `statusText` of "Permanent Redirect".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return permanentRedirect(body, {
+    return Response.json(data, {
+      status: Status.PermanentRedirect,
+      statusText: STATUS_TEXT[Status.PermanentRedirect],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return permanentRedirect(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return permanentRedirect(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-// Client errors (400–499)
-
+/**
+ * Creates a `Response` object with a `status` of 400 and `statusText` of "Bad Request".
+ */
 export function badRequest(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.BadRequest,
@@ -1129,60 +624,26 @@ export function badRequest(
 
 export namespace badRequest {
   /**
-   * @deprecated will be removed in 2.0 in favor of `badRequest` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 400 and `statusText` of "Bad Request".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return badRequest(body, {
+    return Response.json(data, {
+      status: Status.BadRequest,
+      statusText: STATUS_TEXT[Status.BadRequest],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return badRequest(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return badRequest(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 401 and `statusText` of "Unauthorized".
+ */
 export function unauthorized(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.Unauthorized,
@@ -1193,60 +654,26 @@ export function unauthorized(
 
 export namespace unauthorized {
   /**
-   * @deprecated will be removed in 2.0 in favor of `unauthorized` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 401 and `statusText` of "Unauthorized".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return unauthorized(body, {
+    return Response.json(data, {
+      status: Status.Unauthorized,
+      statusText: STATUS_TEXT[Status.Unauthorized],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unauthorized(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unauthorized(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 402 and `statusText` of "Payment Required".
+ */
 export function paymentRequired(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.PaymentRequired,
@@ -1257,60 +684,26 @@ export function paymentRequired(
 
 export namespace paymentRequired {
   /**
-   * @deprecated will be removed in 2.0 in favor of `paymentRequired` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 402 and `statusText` of "Payment Required".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return paymentRequired(body, {
+    return Response.json(data, {
+      status: Status.PaymentRequired,
+      statusText: STATUS_TEXT[Status.PaymentRequired],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return paymentRequired(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return paymentRequired(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 403 and `statusText` of "Forbidden".
+ */
 export function forbidden(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.Forbidden,
@@ -1321,60 +714,26 @@ export function forbidden(
 
 export namespace forbidden {
   /**
-   * @deprecated will be removed in 2.0 in favor of `forbidden` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 403 and `statusText` of "Forbidden".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return forbidden(body, {
+    return Response.json(data, {
+      status: Status.Forbidden,
+      statusText: STATUS_TEXT[Status.Forbidden],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return forbidden(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return forbidden(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 404 and `statusText` of "Not Found".
+ */
 export function notFound(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NotFound,
@@ -1385,60 +744,26 @@ export function notFound(
 
 export namespace notFound {
   /**
-   * @deprecated will be removed in 2.0 in favor of `notFound` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 404 and `statusText` of "Not Found".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return notFound(body, {
+    return Response.json(data, {
+      status: Status.NotFound,
+      statusText: STATUS_TEXT[Status.NotFound],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notFound(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notFound(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 405 and `statusText` of "Method Not Allowed".
+ */
 export function methodNotAllowed(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.MethodNotAllowed,
@@ -1449,60 +774,26 @@ export function methodNotAllowed(
 
 export namespace methodNotAllowed {
   /**
-  @deprecated will be removed in 2.0 in favor of `methodNotAllowed` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 405 and `statusText` of "Method Not Allowed".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return methodNotAllowed(body, {
+    return Response.json(data, {
+      status: Status.MethodNotAllowed,
+      statusText: STATUS_TEXT[Status.MethodNotAllowed],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return methodNotAllowed(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return methodNotAllowed(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 406 and `statusText` of "Not Acceptable".
+ */
 export function notAcceptable(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NotAcceptable,
@@ -1513,60 +804,26 @@ export function notAcceptable(
 
 export namespace notAcceptable {
   /**
-  @deprecated will be removed in 2.0 in favor of `notAcceptable` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 406 and `statusText` of "Not Acceptable".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return notAcceptable(body, {
+    return Response.json(data, {
+      status: Status.NotAcceptable,
+      statusText: STATUS_TEXT[Status.NotAcceptable],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notAcceptable(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notAcceptable(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 407 and `statusText` of "Proxy Auth Required".
+ */
 export function proxyAuthRequired(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.ProxyAuthRequired,
@@ -1577,60 +834,26 @@ export function proxyAuthRequired(
 
 export namespace proxyAuthRequired {
   /**
-  @deprecated will be removed in 2.0 in favor of `proxyAuthRequired` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 407 and `statusText` of "Proxy Auth Required".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return proxyAuthRequired(body, {
+    return Response.json(data, {
+      status: Status.ProxyAuthRequired,
+      statusText: STATUS_TEXT[Status.ProxyAuthRequired],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return proxyAuthRequired(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return proxyAuthRequired(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 408 and `statusText` of "Request Timeout".
+ */
 export function requestTimeout(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.RequestTimeout,
@@ -1641,60 +864,26 @@ export function requestTimeout(
 
 export namespace requestTimeout {
   /**
-  @deprecated will be removed in 2.0 in favor of `requestTimeout` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 408 and `statusText` of "Request Timeout".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return requestTimeout(body, {
+    return Response.json(data, {
+      status: Status.RequestTimeout,
+      statusText: STATUS_TEXT[Status.RequestTimeout],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestTimeout(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestTimeout(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 409 and `statusText` of "Conflict".
+ */
 export function conflict(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.Conflict,
@@ -1705,58 +894,27 @@ export function conflict(
 
 export namespace conflict {
   /**
-  @deprecated will be removed in 2.0 in favor of `conflict` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 409 and `statusText` of "Conflict".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return conflict(body, {
+    return Response.json(data, {
+      status: Status.Conflict,
+      statusText: STATUS_TEXT[Status.Conflict],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return conflict(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return conflict(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-export function gone(body?: BodyInit | null, init?: ResponseInit): Response {
+/**
+ * Creates a `Response` object with a `status` of 410 and `statusText` of "Gone".
+ */
+export function gone(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
   return new Response(body, {
     status: Status.Gone,
     statusText: STATUS_TEXT[Status.Gone],
@@ -1766,60 +924,26 @@ export function gone(body?: BodyInit | null, init?: ResponseInit): Response {
 
 export namespace gone {
   /**
-  @deprecated will be removed in 2.0 in favor of `gone` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 410 and `statusText` of "Gone".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return gone(body, {
+    return Response.json(data, {
+      status: Status.Gone,
+      statusText: STATUS_TEXT[Status.Gone],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return gone(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return gone(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 411 and `statusText` of "Length Required".
+ */
 export function lengthRequired(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.LengthRequired,
@@ -1830,60 +954,26 @@ export function lengthRequired(
 
 export namespace lengthRequired {
   /**
-  @deprecated will be removed in 2.0 in favor of `lengthRequired` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 411 and `statusText` of "Length Required".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return lengthRequired(body, {
+    return Response.json(data, {
+      status: Status.LengthRequired,
+      statusText: STATUS_TEXT[Status.LengthRequired],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return lengthRequired(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return lengthRequired(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 412 and `statusText` of "Precondition Failed".
+ */
 export function preconditionFailed(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.PreconditionFailed,
@@ -1894,60 +984,26 @@ export function preconditionFailed(
 
 export namespace preconditionFailed {
   /**
-  @deprecated will be removed in 2.0 in favor of `preconditionFailed` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 412 and `statusText` of "Precondition Failed".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return preconditionFailed(body, {
+    return Response.json(data, {
+      status: Status.PreconditionFailed,
+      statusText: STATUS_TEXT[Status.PreconditionFailed],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return preconditionFailed(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return preconditionFailed(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 413 and `statusText` of "Request Entity Too Large".
+ */
 export function requestEntityTooLarge(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.RequestEntityTooLarge,
@@ -1958,60 +1014,26 @@ export function requestEntityTooLarge(
 
 export namespace requestEntityTooLarge {
   /**
-  @deprecated will be removed in 2.0 in favor of `requestEntityTooLarge` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 413 and `statusText` of "Request Entity Too Large".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return requestEntityTooLarge(body, {
+    return Response.json(data, {
+      status: Status.RequestEntityTooLarge,
+      statusText: STATUS_TEXT[Status.RequestEntityTooLarge],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestEntityTooLarge(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestEntityTooLarge(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 414 and `statusText` of "Request URI Too Long".
+ */
 export function requestURITooLong(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.RequestURITooLong,
@@ -2022,60 +1044,26 @@ export function requestURITooLong(
 
 export namespace requestURITooLong {
   /**
-  @deprecated will be removed in 2.0 in favor of `requestURITooLong` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 414 and `statusText` of "Request URI Too Long".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return requestURITooLong(body, {
+    return Response.json(data, {
+      status: Status.RequestURITooLong,
+      statusText: STATUS_TEXT[Status.RequestURITooLong],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestURITooLong(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestURITooLong(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 415 and `statusText` of "Unsupported Media Type".
+ */
 export function unsupportedMediaType(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.UnsupportedMediaType,
@@ -2086,60 +1074,26 @@ export function unsupportedMediaType(
 
 export namespace unsupportedMediaType {
   /**
-  @deprecated will be removed in 2.0 in favor of `unsupportedMediaType` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 415 and `statusText` of "Unsupported Media Type".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return unsupportedMediaType(body, {
+    return Response.json(data, {
+      status: Status.UnsupportedMediaType,
+      statusText: STATUS_TEXT[Status.UnsupportedMediaType],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unsupportedMediaType(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unsupportedMediaType(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 416 and `statusText` of "Requested Range Not Satisfiable".
+ */
 export function requestedRangeNotSatisfiable(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.RequestedRangeNotSatisfiable,
@@ -2150,60 +1104,26 @@ export function requestedRangeNotSatisfiable(
 
 export namespace requestedRangeNotSatisfiable {
   /**
-  @deprecated will be removed in 2.0 in favor of `requestedRangeNotSatisfiable` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 416 and `statusText` of "Requested Range Not Satisfiable".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return requestedRangeNotSatisfiable(body, {
+    return Response.json(data, {
+      status: Status.RequestedRangeNotSatisfiable,
+      statusText: STATUS_TEXT[Status.RequestedRangeNotSatisfiable],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestedRangeNotSatisfiable(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestedRangeNotSatisfiable(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 417 and `statusText` of "Expectation Failed".
+ */
 export function expectationFailed(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.ExpectationFailed,
@@ -2214,58 +1134,27 @@ export function expectationFailed(
 
 export namespace expectationFailed {
   /**
-  @deprecated will be removed in 2.0 in favor of `expectationFailed` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 417 and `statusText` of "Expectation Failed".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return expectationFailed(body, {
+    return Response.json(data, {
+      status: Status.ExpectationFailed,
+      statusText: STATUS_TEXT[Status.ExpectationFailed],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return expectationFailed(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return expectationFailed(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-export function teapot(body?: BodyInit | null, init?: ResponseInit): Response {
+/**
+ * Creates a `Response` object with a `status` of 418 and `statusText` of "I'm a teapot".
+ */
+export function teapot(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
   return new Response(body, {
     status: Status.Teapot,
     statusText: STATUS_TEXT[Status.Teapot],
@@ -2275,60 +1164,26 @@ export function teapot(body?: BodyInit | null, init?: ResponseInit): Response {
 
 export namespace teapot {
   /**
-  @deprecated will be removed in 2.0 in favor of `teapot` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 418 and `statusText` of "I'm a teapot".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return teapot(body, {
+    return Response.json(data, {
+      status: Status.Teapot,
+      statusText: STATUS_TEXT[Status.Teapot],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return teapot(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return teapot(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 421 and `statusText` of "Misdirected Request".
+ */
 export function misdirectedRequest(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.MisdirectedRequest,
@@ -2339,60 +1194,26 @@ export function misdirectedRequest(
 
 export namespace misdirectedRequest {
   /**
-  @deprecated will be removed in 2.0 in favor of `misdirectedRequest` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 421 and `statusText` of "Misdirected Request".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return misdirectedRequest(body, {
+    return Response.json(data, {
+      status: Status.MisdirectedRequest,
+      statusText: STATUS_TEXT[Status.MisdirectedRequest],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return misdirectedRequest(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return misdirectedRequest(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 422 and `statusText` of "Unprocessable Entity".
+ */
 export function unprocessableEntity(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.UnprocessableEntity,
@@ -2403,58 +1224,27 @@ export function unprocessableEntity(
 
 export namespace unprocessableEntity {
   /**
-  @deprecated will be removed in 2.0 in favor of `unprocessableEntity` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 422 and `statusText` of "Unprocessable Entity".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return unprocessableEntity(body, {
+    return Response.json(data, {
+      status: Status.UnprocessableEntity,
+      statusText: STATUS_TEXT[Status.UnprocessableEntity],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unprocessableEntity(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unprocessableEntity(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-export function locked(body?: BodyInit | null, init?: ResponseInit): Response {
+/**
+ * Creates a `Response` object with a `status` of 423 and `statusText` of "Locked".
+ */
+export function locked(
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
+): Response {
   return new Response(body, {
     status: Status.Locked,
     statusText: STATUS_TEXT[Status.Locked],
@@ -2464,60 +1254,26 @@ export function locked(body?: BodyInit | null, init?: ResponseInit): Response {
 
 export namespace locked {
   /**
-  @deprecated will be removed in 2.0 in favor of `locked` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 423 and `statusText` of "Locked".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return locked(body, {
+    return Response.json(data, {
+      status: Status.Locked,
+      statusText: STATUS_TEXT[Status.Locked],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return locked(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return locked(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 424 and `statusText` of "Failed Dependency".
+ */
 export function failedDependency(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.FailedDependency,
@@ -2528,60 +1284,26 @@ export function failedDependency(
 
 export namespace failedDependency {
   /**
-  @deprecated will be removed in 2.0 in favor of `failedDependency` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 424 and `statusText` of "Failed Dependency".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return failedDependency(body, {
+    return Response.json(data, {
+      status: Status.FailedDependency,
+      statusText: STATUS_TEXT[Status.FailedDependency],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return failedDependency(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return failedDependency(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 425 and `statusText` of "Too Early".
+ */
 export function tooEarly(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.TooEarly,
@@ -2592,60 +1314,26 @@ export function tooEarly(
 
 export namespace tooEarly {
   /**
-  @deprecated will be removed in 2.0 in favor of `tooEarly` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 425 and `statusText` of "Too Early".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return tooEarly(body, {
+    return Response.json(data, {
+      status: Status.TooEarly,
+      statusText: STATUS_TEXT[Status.TooEarly],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return tooEarly(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return tooEarly(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 426 and `statusText` of "Upgrade Required".
+ */
 export function upgradeRequired(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.UpgradeRequired,
@@ -2656,60 +1344,26 @@ export function upgradeRequired(
 
 export namespace upgradeRequired {
   /**
-  @deprecated will be removed in 2.0 in favor of `upgradeRequired` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 426 and `statusText` of "Upgrade Required".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return upgradeRequired(body, {
+    return Response.json(data, {
+      status: Status.UpgradeRequired,
+      statusText: STATUS_TEXT[Status.UpgradeRequired],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return upgradeRequired(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return upgradeRequired(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 428 and `statusText` of "Precondition Required".
+ */
 export function preconditionRequired(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.PreconditionRequired,
@@ -2720,60 +1374,26 @@ export function preconditionRequired(
 
 export namespace preconditionRequired {
   /**
-  @deprecated will be removed in 2.0 in favor of `preconditionRequired` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 428 and `statusText` of "Precondition Required".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return preconditionRequired(body, {
+    return Response.json(data, {
+      status: Status.PreconditionRequired,
+      statusText: STATUS_TEXT[Status.PreconditionRequired],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return preconditionRequired(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return preconditionRequired(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 429 and `statusText` of "Too Many Requests".
+ */
 export function tooManyRequests(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.TooManyRequests,
@@ -2784,60 +1404,26 @@ export function tooManyRequests(
 
 export namespace tooManyRequests {
   /**
-  @deprecated will be removed in 2.0 in favor of `tooManyRequests` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 429 and `statusText` of "Too Many Requests".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return tooManyRequests(body, {
+    return Response.json(data, {
+      status: Status.TooManyRequests,
+      statusText: STATUS_TEXT[Status.TooManyRequests],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return tooManyRequests(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return tooManyRequests(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 431 and `statusText` of "Request Header Fields Too Large".
+ */
 export function requestHeaderFieldsTooLarge(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.RequestHeaderFieldsTooLarge,
@@ -2848,60 +1434,26 @@ export function requestHeaderFieldsTooLarge(
 
 export namespace requestHeaderFieldsTooLarge {
   /**
-  @deprecated will be removed in 2.0 in favor of `requestHeaderFieldsTooLarge` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 431 and `statusText` of "Request Header Fields Too Large".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return requestHeaderFieldsTooLarge(body, {
+    return Response.json(data, {
+      status: Status.RequestHeaderFieldsTooLarge,
+      statusText: STATUS_TEXT[Status.RequestHeaderFieldsTooLarge],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestHeaderFieldsTooLarge(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return requestHeaderFieldsTooLarge(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 451 and `statusText` of "Unavailable For Legal Reasons".
+ */
 export function unavailableForLegalReasons(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.UnavailableForLegalReasons,
@@ -2912,61 +1464,26 @@ export function unavailableForLegalReasons(
 
 export namespace unavailableForLegalReasons {
   /**
-  @deprecated will be removed in 2.0 in favor of `unavailableForLegalReasons` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 451 and `statusText` of "Unavailable For Legal Reasons".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return unavailableForLegalReasons(body, {
+    return Response.json(data, {
+      status: Status.UnavailableForLegalReasons,
+      statusText: STATUS_TEXT[Status.UnavailableForLegalReasons],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unavailableForLegalReasons(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return unavailableForLegalReasons(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
-// Server errors (500–599)
+/**
+ * Creates a `Response` object with a `status` of 500 and `statusText` of "Internal Server Error".
+ */
 export function internalServerError(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.InternalServerError,
@@ -2977,60 +1494,26 @@ export function internalServerError(
 
 export namespace internalServerError {
   /**
-  @deprecated will be removed in 2.0 in favor of `internalServerError` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 500 and `statusText` of "Internal Server Error".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return internalServerError(body, {
+    return Response.json(data, {
+      status: Status.InternalServerError,
+      statusText: STATUS_TEXT[Status.InternalServerError],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return internalServerError(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return internalServerError(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 501 and `statusText` of "Not Implemented".
+ */
 export function notImplemented(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NotImplemented,
@@ -3041,60 +1524,26 @@ export function notImplemented(
 
 export namespace notImplemented {
   /**
-  @deprecated will be removed in 2.0 in favor of `notImplemented` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 501 and `statusText` of "Not Implemented".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return notImplemented(body, {
+    return Response.json(data, {
+      status: Status.NotImplemented,
+      statusText: STATUS_TEXT[Status.NotImplemented],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notImplemented(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notImplemented(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 502 and `statusText` of "Bad Gateway".
+ */
 export function badGateway(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.BadGateway,
@@ -3105,60 +1554,26 @@ export function badGateway(
 
 export namespace badGateway {
   /**
-  @deprecated will be removed in 2.0 in favor of `badGateway` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 502 and `statusText` of "Bad Gateway".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return badGateway(body, {
+    return Response.json(data, {
+      status: Status.BadGateway,
+      statusText: STATUS_TEXT[Status.BadGateway],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return badGateway(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return badGateway(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 503 and `statusText` of "Service Unavailable".
+ */
 export function serviceUnavailable(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.ServiceUnavailable,
@@ -3169,60 +1584,26 @@ export function serviceUnavailable(
 
 export namespace serviceUnavailable {
   /**
-  @deprecated will be removed in 2.0 in favor of `serviceUnavailable` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 503 and `statusText` of "Service Unavailable".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return serviceUnavailable(body, {
+    return Response.json(data, {
+      status: Status.ServiceUnavailable,
+      statusText: STATUS_TEXT[Status.ServiceUnavailable],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return serviceUnavailable(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return serviceUnavailable(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 504 and `statusText` of "Gateway Timeout".
+ */
 export function gatewayTimeout(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.GatewayTimeout,
@@ -3233,60 +1614,26 @@ export function gatewayTimeout(
 
 export namespace gatewayTimeout {
   /**
-  @deprecated will be removed in 2.0 in favor of `gatewayTimeout` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 504 and `statusText` of "Gateway Timeout".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return gatewayTimeout(body, {
+    return Response.json(data, {
+      status: Status.GatewayTimeout,
+      statusText: STATUS_TEXT[Status.GatewayTimeout],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return gatewayTimeout(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return gatewayTimeout(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 505 and `statusText` of "HTTP Version Not Supported".
+ */
 export function httpVersionNotSupported(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.HTTPVersionNotSupported,
@@ -3297,60 +1644,26 @@ export function httpVersionNotSupported(
 
 export namespace httpVersionNotSupported {
   /**
-  @deprecated will be removed in 2.0 in favor of `httpVersionNotSupported` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 505 and `statusText` of "HTTP Version Not Supported".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return httpVersionNotSupported(body, {
+    return Response.json(data, {
+      status: Status.HTTPVersionNotSupported,
+      statusText: STATUS_TEXT[Status.HTTPVersionNotSupported],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return httpVersionNotSupported(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return httpVersionNotSupported(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 506 and `statusText` of "Variant Also Negotiates".
+ */
 export function variantAlsoNegotiates(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.VariantAlsoNegotiates,
@@ -3361,60 +1674,26 @@ export function variantAlsoNegotiates(
 
 export namespace variantAlsoNegotiates {
   /**
-  @deprecated will be removed in 2.0 in favor of `variantAlsoNegotiates` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 506 and `statusText` of "Variant Also Negotiates".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return variantAlsoNegotiates(body, {
+    return Response.json(data, {
+      status: Status.VariantAlsoNegotiates,
+      statusText: STATUS_TEXT[Status.VariantAlsoNegotiates],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return variantAlsoNegotiates(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return variantAlsoNegotiates(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 507 and `statusText` of "Insufficient Storage".
+ */
 export function insufficientStorage(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.InsufficientStorage,
@@ -3425,60 +1704,26 @@ export function insufficientStorage(
 
 export namespace insufficientStorage {
   /**
-  @deprecated will be removed in 2.0 in favor of `insufficientStorage` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 507 and `statusText` of "Insufficient Storage".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return insufficientStorage(body, {
+    return Response.json(data, {
+      status: Status.InsufficientStorage,
+      statusText: STATUS_TEXT[Status.InsufficientStorage],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return insufficientStorage(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return insufficientStorage(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 508 and `statusText` of "Loop Detected".
+ */
 export function loopDetected(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.LoopDetected,
@@ -3489,60 +1734,26 @@ export function loopDetected(
 
 export namespace loopDetected {
   /**
-  @deprecated will be removed in 2.0 in favor of `loopDetected` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 508 and `statusText` of "Loop Detected".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return loopDetected(body, {
+    return Response.json(data, {
+      status: Status.LoopDetected,
+      statusText: STATUS_TEXT[Status.LoopDetected],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return loopDetected(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return loopDetected(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 510 and `statusText` of "Not Extended".
+ */
 export function notExtended(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NotExtended,
@@ -3553,60 +1764,26 @@ export function notExtended(
 
 export namespace notExtended {
   /**
-  @deprecated will be removed in 2.0 in favor of `notExtended` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 510 and `statusText` of "Not Extended".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return notExtended(body, {
+    return Response.json(data, {
+      status: Status.NotExtended,
+      statusText: STATUS_TEXT[Status.NotExtended],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notExtended(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return notExtended(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
 
+/**
+ * Creates a `Response` object with a `status` of 511 and `statusText` of "Network Authentication Required".
+ */
 export function networkAuthenticationRequired(
-  body?: BodyInit | null,
-  init?: ResponseInitWithoutStatus
+  body?: BodyInit | null | undefined,
+  init?: ResponseInitWithoutStatus | undefined,
 ): Response {
   return new Response(body, {
     status: Status.NetworkAuthenticationRequired,
@@ -3617,53 +1794,16 @@ export function networkAuthenticationRequired(
 
 export namespace networkAuthenticationRequired {
   /**
-  @deprecated will be removed in 2.0 in favor of `networkAuthenticationRequired` function to avoid overriding default `Response` constructor behavior.
+   * Creates a JSON `Response` object with a `status` of 511 and `statusText` of "Network Authentication Required".
    */
-  export function blob(
-    body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-    init?: ResponseInitWithoutStatus
+  export function json(
+    data: unknown,
+    init?: ResponseInitWithoutStatus | undefined,
   ): Response {
-    const additionalHeaders: HeadersInit = {};
-
-    if (body instanceof Uint8Array) {
-      additionalHeaders["Content-Type"] = "application/octet-stream";
-    }
-
-    return networkAuthenticationRequired(body, {
+    return Response.json(data, {
+      status: Status.NetworkAuthenticationRequired,
+      statusText: STATUS_TEXT[Status.NetworkAuthenticationRequired],
       ...init,
-      headers: {
-        ...init?.headers,
-        ...additionalHeaders,
-      },
-    });
-  }
-
-  /**
-   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
-   */
-  export function text(
-    body?: string,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return networkAuthenticationRequired(body, {
-      ...init,
-      headers: {
-        "Content-Type": "text/plain",
-        ...init?.headers,
-      },
-    });
-  }
-
-  export function json<T>(
-    body?: T,
-    init?: ResponseInitWithoutStatus
-  ): Response {
-    return networkAuthenticationRequired(JSON.stringify(body), {
-      ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-      },
     });
   }
 }
