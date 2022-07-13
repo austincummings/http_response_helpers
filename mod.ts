@@ -34,6 +34,9 @@ export function ok(body?: BodyInit | null, init?: ResponseInit): Response {
 }
 
 export namespace ok {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -53,6 +56,9 @@ export namespace ok {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -89,6 +95,9 @@ export function created(body?: BodyInit | null, init?: ResponseInit): Response {
 }
 
 export namespace created {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `created` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -108,6 +117,9 @@ export namespace created {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -147,6 +159,9 @@ export function accepted(
 }
 
 export namespace accepted {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `accepted` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -166,6 +181,9 @@ export namespace accepted {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -205,6 +223,9 @@ export function nonAuthoritativeInfo(
 }
 
 export namespace nonAuthoritativeInfo {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `nonAuthoritativeInfo` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -224,6 +245,9 @@ export namespace nonAuthoritativeInfo {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -274,6 +298,9 @@ export function resetContent(
 }
 
 export namespace resetContent {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `resetContent` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -293,6 +320,9 @@ export namespace resetContent {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -332,6 +362,9 @@ export function partialContent(
 }
 
 export namespace partialContent {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `partialContent` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -351,6 +384,9 @@ export namespace partialContent {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -390,6 +426,9 @@ export function multiStatus(
 }
 
 export namespace multiStatus {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `multiStatus` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -409,6 +448,9 @@ export namespace multiStatus {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -448,6 +490,9 @@ export function alreadyReported(
 }
 
 export namespace alreadyReported {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `alreadyReported` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -467,6 +512,9 @@ export namespace alreadyReported {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -503,6 +551,9 @@ export function imUsed(body?: BodyInit | null, init?: ResponseInit): Response {
 }
 
 export namespace imUsed {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `imUsed` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -522,6 +573,9 @@ export namespace imUsed {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -563,6 +617,9 @@ export function multipleChoices(
 }
 
 export namespace multipleChoices {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `multipleChoices` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -582,6 +639,9 @@ export namespace multipleChoices {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -621,6 +681,9 @@ export function movedPermanently(
 }
 
 export namespace movedPermanently {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `movedPermanently` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -640,6 +703,9 @@ export namespace movedPermanently {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -676,6 +742,9 @@ export function found(body?: BodyInit | null, init?: ResponseInit): Response {
 }
 
 export namespace found {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `found` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -695,6 +764,9 @@ export namespace found {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -734,6 +806,9 @@ export function seeOther(
 }
 
 export namespace seeOther {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `seeOther` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -753,6 +828,9 @@ export namespace seeOther {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -792,6 +870,9 @@ export function notModified(
 }
 
 export namespace notModified {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `notModified` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -811,6 +892,9 @@ export namespace notModified {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -850,6 +934,9 @@ export function useProxy(
 }
 
 export namespace useProxy {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `useProxy` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -869,6 +956,9 @@ export namespace useProxy {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -908,6 +998,9 @@ export function temporaryRedirect(
 }
 
 export namespace temporaryRedirect {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `temporaryRedirect` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -927,6 +1020,9 @@ export namespace temporaryRedirect {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -966,6 +1062,9 @@ export function permanentRedirect(
 }
 
 export namespace permanentRedirect {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `permanentRedirect` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -985,6 +1084,9 @@ export namespace permanentRedirect {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1026,6 +1128,9 @@ export function badRequest(
 }
 
 export namespace badRequest {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `badRequest` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1045,6 +1150,9 @@ export namespace badRequest {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1084,6 +1192,9 @@ export function unauthorized(
 }
 
 export namespace unauthorized {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `unauthorized` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1103,6 +1214,9 @@ export namespace unauthorized {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1142,6 +1256,9 @@ export function paymentRequired(
 }
 
 export namespace paymentRequired {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `paymentRequired` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1161,6 +1278,9 @@ export namespace paymentRequired {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1200,6 +1320,9 @@ export function forbidden(
 }
 
 export namespace forbidden {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `forbidden` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1219,6 +1342,9 @@ export namespace forbidden {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1258,6 +1384,9 @@ export function notFound(
 }
 
 export namespace notFound {
+  /**
+   * @deprecated will be removed in 2.0 in favor of `notFound` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1277,6 +1406,9 @@ export namespace notFound {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1316,6 +1448,9 @@ export function methodNotAllowed(
 }
 
 export namespace methodNotAllowed {
+  /**
+  @deprecated will be removed in 2.0 in favor of `methodNotAllowed` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1335,6 +1470,9 @@ export namespace methodNotAllowed {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1374,6 +1512,9 @@ export function notAcceptable(
 }
 
 export namespace notAcceptable {
+  /**
+  @deprecated will be removed in 2.0 in favor of `notAcceptable` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1393,6 +1534,9 @@ export namespace notAcceptable {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1432,6 +1576,9 @@ export function proxyAuthRequired(
 }
 
 export namespace proxyAuthRequired {
+  /**
+  @deprecated will be removed in 2.0 in favor of `proxyAuthRequired` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1451,6 +1598,9 @@ export namespace proxyAuthRequired {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1490,6 +1640,9 @@ export function requestTimeout(
 }
 
 export namespace requestTimeout {
+  /**
+  @deprecated will be removed in 2.0 in favor of `requestTimeout` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1509,6 +1662,9 @@ export namespace requestTimeout {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1548,6 +1704,9 @@ export function conflict(
 }
 
 export namespace conflict {
+  /**
+  @deprecated will be removed in 2.0 in favor of `conflict` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1567,6 +1726,9 @@ export namespace conflict {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1603,6 +1765,9 @@ export function gone(body?: BodyInit | null, init?: ResponseInit): Response {
 }
 
 export namespace gone {
+  /**
+  @deprecated will be removed in 2.0 in favor of `gone` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1622,6 +1787,9 @@ export namespace gone {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1661,6 +1829,9 @@ export function lengthRequired(
 }
 
 export namespace lengthRequired {
+  /**
+  @deprecated will be removed in 2.0 in favor of `lengthRequired` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1680,6 +1851,9 @@ export namespace lengthRequired {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1719,6 +1893,9 @@ export function preconditionFailed(
 }
 
 export namespace preconditionFailed {
+  /**
+  @deprecated will be removed in 2.0 in favor of `preconditionFailed` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1738,6 +1915,9 @@ export namespace preconditionFailed {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1777,6 +1957,9 @@ export function requestEntityTooLarge(
 }
 
 export namespace requestEntityTooLarge {
+  /**
+  @deprecated will be removed in 2.0 in favor of `requestEntityTooLarge` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1796,6 +1979,9 @@ export namespace requestEntityTooLarge {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1835,6 +2021,9 @@ export function requestURITooLong(
 }
 
 export namespace requestURITooLong {
+  /**
+  @deprecated will be removed in 2.0 in favor of `requestURITooLong` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1854,6 +2043,9 @@ export namespace requestURITooLong {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1893,6 +2085,9 @@ export function unsupportedMediaType(
 }
 
 export namespace unsupportedMediaType {
+  /**
+  @deprecated will be removed in 2.0 in favor of `unsupportedMediaType` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1912,6 +2107,9 @@ export namespace unsupportedMediaType {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -1951,6 +2149,9 @@ export function requestedRangeNotSatisfiable(
 }
 
 export namespace requestedRangeNotSatisfiable {
+  /**
+  @deprecated will be removed in 2.0 in favor of `requestedRangeNotSatisfiable` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -1970,6 +2171,9 @@ export namespace requestedRangeNotSatisfiable {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2009,6 +2213,9 @@ export function expectationFailed(
 }
 
 export namespace expectationFailed {
+  /**
+  @deprecated will be removed in 2.0 in favor of `expectationFailed` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2028,6 +2235,9 @@ export namespace expectationFailed {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2064,6 +2274,9 @@ export function teapot(body?: BodyInit | null, init?: ResponseInit): Response {
 }
 
 export namespace teapot {
+  /**
+  @deprecated will be removed in 2.0 in favor of `teapot` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2083,6 +2296,9 @@ export namespace teapot {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2122,6 +2338,9 @@ export function misdirectedRequest(
 }
 
 export namespace misdirectedRequest {
+  /**
+  @deprecated will be removed in 2.0 in favor of `misdirectedRequest` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2141,6 +2360,9 @@ export namespace misdirectedRequest {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2180,6 +2402,9 @@ export function unprocessableEntity(
 }
 
 export namespace unprocessableEntity {
+  /**
+  @deprecated will be removed in 2.0 in favor of `unprocessableEntity` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2199,6 +2424,9 @@ export namespace unprocessableEntity {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2235,6 +2463,9 @@ export function locked(body?: BodyInit | null, init?: ResponseInit): Response {
 }
 
 export namespace locked {
+  /**
+  @deprecated will be removed in 2.0 in favor of `locked` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2254,6 +2485,9 @@ export namespace locked {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2293,6 +2527,9 @@ export function failedDependency(
 }
 
 export namespace failedDependency {
+  /**
+  @deprecated will be removed in 2.0 in favor of `failedDependency` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2312,6 +2549,9 @@ export namespace failedDependency {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2351,6 +2591,9 @@ export function tooEarly(
 }
 
 export namespace tooEarly {
+  /**
+  @deprecated will be removed in 2.0 in favor of `tooEarly` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2370,6 +2613,9 @@ export namespace tooEarly {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2409,6 +2655,9 @@ export function upgradeRequired(
 }
 
 export namespace upgradeRequired {
+  /**
+  @deprecated will be removed in 2.0 in favor of `upgradeRequired` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2428,6 +2677,9 @@ export namespace upgradeRequired {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2467,6 +2719,9 @@ export function preconditionRequired(
 }
 
 export namespace preconditionRequired {
+  /**
+  @deprecated will be removed in 2.0 in favor of `preconditionRequired` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2486,6 +2741,9 @@ export namespace preconditionRequired {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2525,6 +2783,9 @@ export function tooManyRequests(
 }
 
 export namespace tooManyRequests {
+  /**
+  @deprecated will be removed in 2.0 in favor of `tooManyRequests` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2544,6 +2805,9 @@ export namespace tooManyRequests {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2583,6 +2847,9 @@ export function requestHeaderFieldsTooLarge(
 }
 
 export namespace requestHeaderFieldsTooLarge {
+  /**
+  @deprecated will be removed in 2.0 in favor of `requestHeaderFieldsTooLarge` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2602,6 +2869,9 @@ export namespace requestHeaderFieldsTooLarge {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2641,6 +2911,9 @@ export function unavailableForLegalReasons(
 }
 
 export namespace unavailableForLegalReasons {
+  /**
+  @deprecated will be removed in 2.0 in favor of `unavailableForLegalReasons` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2660,6 +2933,9 @@ export namespace unavailableForLegalReasons {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2700,6 +2976,9 @@ export function internalServerError(
 }
 
 export namespace internalServerError {
+  /**
+  @deprecated will be removed in 2.0 in favor of `internalServerError` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2719,6 +2998,9 @@ export namespace internalServerError {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2758,6 +3040,9 @@ export function notImplemented(
 }
 
 export namespace notImplemented {
+  /**
+  @deprecated will be removed in 2.0 in favor of `notImplemented` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2777,6 +3062,9 @@ export namespace notImplemented {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2816,6 +3104,9 @@ export function badGateway(
 }
 
 export namespace badGateway {
+  /**
+  @deprecated will be removed in 2.0 in favor of `badGateway` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2835,6 +3126,9 @@ export namespace badGateway {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2874,6 +3168,9 @@ export function serviceUnavailable(
 }
 
 export namespace serviceUnavailable {
+  /**
+  @deprecated will be removed in 2.0 in favor of `serviceUnavailable` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2893,6 +3190,9 @@ export namespace serviceUnavailable {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2932,6 +3232,9 @@ export function gatewayTimeout(
 }
 
 export namespace gatewayTimeout {
+  /**
+  @deprecated will be removed in 2.0 in favor of `gatewayTimeout` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -2951,6 +3254,9 @@ export namespace gatewayTimeout {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -2990,6 +3296,9 @@ export function httpVersionNotSupported(
 }
 
 export namespace httpVersionNotSupported {
+  /**
+  @deprecated will be removed in 2.0 in favor of `httpVersionNotSupported` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -3009,6 +3318,9 @@ export namespace httpVersionNotSupported {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -3048,6 +3360,9 @@ export function variantAlsoNegotiates(
 }
 
 export namespace variantAlsoNegotiates {
+  /**
+  @deprecated will be removed in 2.0 in favor of `variantAlsoNegotiates` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -3067,6 +3382,9 @@ export namespace variantAlsoNegotiates {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -3106,6 +3424,9 @@ export function insufficientStorage(
 }
 
 export namespace insufficientStorage {
+  /**
+  @deprecated will be removed in 2.0 in favor of `insufficientStorage` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -3125,6 +3446,9 @@ export namespace insufficientStorage {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -3164,6 +3488,9 @@ export function loopDetected(
 }
 
 export namespace loopDetected {
+  /**
+  @deprecated will be removed in 2.0 in favor of `loopDetected` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -3183,6 +3510,9 @@ export namespace loopDetected {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -3222,6 +3552,9 @@ export function notExtended(
 }
 
 export namespace notExtended {
+  /**
+  @deprecated will be removed in 2.0 in favor of `notExtended` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -3241,6 +3574,9 @@ export namespace notExtended {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
@@ -3280,6 +3616,9 @@ export function networkAuthenticationRequired(
 }
 
 export namespace networkAuthenticationRequired {
+  /**
+  @deprecated will be removed in 2.0 in favor of `networkAuthenticationRequired` function to avoid overriding default `Response` constructor behavior.
+   */
   export function blob(
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
@@ -3299,6 +3638,9 @@ export namespace networkAuthenticationRequired {
     });
   }
 
+  /**
+   * @deprecated will be removed in 2.0 in favor of `ok` function to avoid overriding default `Response` constructor behavior.
+   */
   export function text(
     body?: string,
     init?: ResponseInitWithoutStatus
