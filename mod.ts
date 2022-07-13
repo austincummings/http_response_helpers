@@ -38,11 +38,17 @@ export namespace ok {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return ok(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -87,11 +93,17 @@ export namespace created {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return created(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -139,11 +151,17 @@ export namespace accepted {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return accepted(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -191,11 +209,17 @@ export namespace nonAuthoritativeInfo {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return nonAuthoritativeInfo(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -238,47 +262,6 @@ export function noContent(
   });
 }
 
-// export namespace noContent {
-//   export function blob(
-//     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
-//     init?: ResponseInitWithoutStatus
-//   ): Response {
-//     return noContent(body, {
-//       ...init,
-//       headers: {
-//         "Content-Type": "application/octet-stream",
-//         ...init?.headers,
-//       },
-//     });
-//   }
-
-//   export function text(
-//     body?: string,
-//     init?: ResponseInitWithoutStatus
-//   ): Response {
-//     return noContent(body, {
-//       ...init,
-//       headers: {
-//         "Content-Type": "text/plain",
-//         ...init?.headers,
-//       },
-//     });
-//   }
-
-//   export function json<T>(
-//     body?: T,
-//     init?: ResponseInitWithoutStatus
-//   ): Response {
-//     return noContent(JSON.stringify(body), {
-//       ...init,
-//       headers: {
-//         "Content-Type": "application/json",
-//         ...init?.headers,
-//       },
-//     });
-//   }
-// }
-
 export function resetContent(
   body?: BodyInit | null,
   init?: ResponseInitWithoutStatus
@@ -295,11 +278,17 @@ export namespace resetContent {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return resetContent(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -347,11 +336,17 @@ export namespace partialContent {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return partialContent(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -399,11 +394,17 @@ export namespace multiStatus {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return multiStatus(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -451,11 +452,17 @@ export namespace alreadyReported {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return alreadyReported(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -500,11 +507,17 @@ export namespace imUsed {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return imUsed(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -554,11 +567,17 @@ export namespace multipleChoices {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return multipleChoices(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -606,11 +625,17 @@ export namespace movedPermanently {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return movedPermanently(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -655,11 +680,17 @@ export namespace found {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return found(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -707,11 +738,17 @@ export namespace seeOther {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return seeOther(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -759,11 +796,17 @@ export namespace notModified {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return notModified(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -811,11 +854,17 @@ export namespace useProxy {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return useProxy(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -863,11 +912,17 @@ export namespace temporaryRedirect {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return temporaryRedirect(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -915,11 +970,17 @@ export namespace permanentRedirect {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return permanentRedirect(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -969,11 +1030,17 @@ export namespace badRequest {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return badRequest(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1021,11 +1088,17 @@ export namespace unauthorized {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return unauthorized(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1073,11 +1146,17 @@ export namespace paymentRequired {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return paymentRequired(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1125,11 +1204,17 @@ export namespace forbidden {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return forbidden(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1177,11 +1262,17 @@ export namespace notFound {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return notFound(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1229,11 +1320,17 @@ export namespace methodNotAllowed {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return methodNotAllowed(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1281,11 +1378,17 @@ export namespace notAcceptable {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return notAcceptable(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1333,11 +1436,17 @@ export namespace proxyAuthRequired {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return proxyAuthRequired(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1385,11 +1494,17 @@ export namespace requestTimeout {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return requestTimeout(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1437,11 +1552,17 @@ export namespace conflict {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return conflict(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1486,11 +1607,17 @@ export namespace gone {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return gone(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1538,11 +1665,17 @@ export namespace lengthRequired {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return lengthRequired(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1590,11 +1723,17 @@ export namespace preconditionFailed {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return preconditionFailed(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1642,11 +1781,17 @@ export namespace requestEntityTooLarge {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return requestEntityTooLarge(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1694,11 +1839,17 @@ export namespace requestURITooLong {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return requestURITooLong(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1746,11 +1897,17 @@ export namespace unsupportedMediaType {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return unsupportedMediaType(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1798,11 +1955,17 @@ export namespace requestedRangeNotSatisfiable {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return requestedRangeNotSatisfiable(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1850,11 +2013,17 @@ export namespace expectationFailed {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return expectationFailed(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1899,11 +2068,17 @@ export namespace teapot {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return teapot(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -1951,11 +2126,17 @@ export namespace misdirectedRequest {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return misdirectedRequest(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2003,11 +2184,17 @@ export namespace unprocessableEntity {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return unprocessableEntity(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2052,11 +2239,17 @@ export namespace locked {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return locked(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2104,11 +2297,17 @@ export namespace failedDependency {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return failedDependency(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2156,11 +2355,17 @@ export namespace tooEarly {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return tooEarly(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2208,11 +2413,17 @@ export namespace upgradeRequired {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return upgradeRequired(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2260,11 +2471,17 @@ export namespace preconditionRequired {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return preconditionRequired(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2312,11 +2529,17 @@ export namespace tooManyRequests {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return tooManyRequests(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2364,11 +2587,17 @@ export namespace requestHeaderFieldsTooLarge {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return requestHeaderFieldsTooLarge(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2416,11 +2645,17 @@ export namespace unavailableForLegalReasons {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return unavailableForLegalReasons(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2469,11 +2704,17 @@ export namespace internalServerError {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return internalServerError(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2521,11 +2762,17 @@ export namespace notImplemented {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return notImplemented(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2573,11 +2820,17 @@ export namespace badGateway {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return badGateway(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2625,11 +2878,17 @@ export namespace serviceUnavailable {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return serviceUnavailable(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2677,11 +2936,17 @@ export namespace gatewayTimeout {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return gatewayTimeout(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2729,11 +2994,17 @@ export namespace httpVersionNotSupported {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return httpVersionNotSupported(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2781,11 +3052,17 @@ export namespace variantAlsoNegotiates {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return variantAlsoNegotiates(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2833,11 +3110,17 @@ export namespace insufficientStorage {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return insufficientStorage(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2885,11 +3168,17 @@ export namespace loopDetected {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return loopDetected(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2937,11 +3226,17 @@ export namespace notExtended {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return notExtended(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
@@ -2989,11 +3284,17 @@ export namespace networkAuthenticationRequired {
     body?: ReadableStream<Uint8Array> | Blob | BufferSource,
     init?: ResponseInitWithoutStatus
   ): Response {
+    const additionalHeaders: HeadersInit = {};
+
+    if (body instanceof Uint8Array) {
+      additionalHeaders["Content-Type"] = "application/octet-stream";
+    }
+
     return networkAuthenticationRequired(body, {
       ...init,
       headers: {
-        "Content-Type": "application/octet-stream",
         ...init?.headers,
+        ...additionalHeaders,
       },
     });
   }
